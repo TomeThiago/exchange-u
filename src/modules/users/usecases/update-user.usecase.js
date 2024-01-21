@@ -1,11 +1,8 @@
-const { database } = require("../../../infra/database");
 const { User } = require("../../../infra/database/entities/user");
 const AppError = require("../../../infra/errors/AppError");
 
 module.exports = {
-  async execute(props) {
-    const { userId, name, email, college } = props;
-
+  async execute({ userId, name, email, college }) {
     const user = await User.findOne({
       where: {
         id: userId,

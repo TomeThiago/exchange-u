@@ -2,22 +2,9 @@ const createUserUseCase = require("../usecases/create-user.usecase");
 const getUserByIdUseCase = require("../usecases/get-user-by-id.usecase");
 const updateUserUseCase = require("../usecases/update-user.usecase");
 const deleteUserByIdUseCase = require("../usecases/delete-user-by-id.usecase");
+const updatePhotoUsecase = require("../usecases/update-photo.usecase");
 
 module.exports = {
-  async create(request, response) {
-    const { name, email, password, photoUrl, college } = request.body;
-
-    const user = await createUserUseCase.execute({
-      name,
-      email,
-      password,
-      photoUrl,
-      college,
-    });
-
-    return response.json(user);
-  },
-
   async me(request, response) {
     const userId = request.user.id;
 
@@ -47,5 +34,17 @@ module.exports = {
     await deleteUserByIdUseCase.execute(userId);
 
     return response.status(205).json();
+  },
+
+  async updatePhoto(request, response) {
+    const userId = request.user.id;
+    const photoUrl = request.file;
+
+    await updatePhotoUsecase.execute({
+      userId,
+      photoUrl: `${process.env.APP_URL}/files/${photoUrl.filename}`,
+    });
+
+    return response.status(204).json();
   },
 };

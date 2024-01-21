@@ -1,4 +1,4 @@
-# Inside Gestão de Eventos
+# Exchange U
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Nodejs](https://img.shields.io/badge/node.js-v21.4.0-green)

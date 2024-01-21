@@ -3,11 +3,12 @@ const listCountriesUsecase = require("../usecases/list-countries.usecase");
 
 module.exports = {
   async create(request, response) {
-    const { name, photoUrl, code } = request.body;
+    const { name, code } = request.body;
+    const photoUrl = request.file;
 
     const country = await createCountryUsecase.execute({
       name,
-      photoUrl,
+      photoUrl: `${process.env.APP_URL}/files/${photoUrl.filename}`,
       code,
     });
 

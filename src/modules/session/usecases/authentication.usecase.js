@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const AppError = require("../../../infra/errors/AppError");
 const { User } = require("../../../infra/database/entities/user");
+const hashProvider = require("../../../infra/providers/hashProvider");
 
 module.exports = {
   async execute(session) {
@@ -10,7 +10,7 @@ module.exports = {
 
     const user = await User.findOne({
       where: {
-        email: login,
+        email: login.toLowerCase(),
       },
     });
 
@@ -18,7 +18,7 @@ module.exports = {
       throw new AppError("Email or password invalid", 401);
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await hashProvider.compare(password, user.password);
 
     if (!passwordMatch) {
       throw new AppError("Email or password invalid", 401);

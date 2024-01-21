@@ -13,11 +13,9 @@ module.exports = (request, response, next) => {
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
 
-    const { sub } = decoded;
+    const { user } = decoded;
 
-    request.user = {
-      id: Number(sub),
-    };
+    request.user = user;
 
     return next();
   } catch (err) {
