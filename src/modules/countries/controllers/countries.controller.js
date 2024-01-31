@@ -1,4 +1,5 @@
 const createCountryUsecase = require("../usecases/create-country.usecase");
+const deleteCountryUsecase = require("../usecases/delete-country.usecase");
 const listCountriesUsecase = require("../usecases/list-countries.usecase");
 
 module.exports = {
@@ -8,7 +9,9 @@ module.exports = {
 
     const country = await createCountryUsecase.execute({
       name,
-      photoUrl: `${process.env.APP_URL}/files/${photoUrl.filename}`,
+      photoUrl: photoUrl
+        ? `${process.env.APP_URL}/files/${photoUrl.filename}`
+        : "",
       code,
     });
 
@@ -19,5 +22,15 @@ module.exports = {
     const countries = await listCountriesUsecase.execute();
 
     return response.json(countries);
+  },
+
+  async deleteCountry(request, response) {
+    const { countryId } = request.params;
+
+    await deleteCountryUsecase.execute({
+      countryId,
+    });
+
+    return response.status(205).json();
   },
 };

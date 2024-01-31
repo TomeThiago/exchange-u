@@ -1,5 +1,6 @@
 const createCollegeUsecase = require("../usecases/create-college.usecase");
 const findCollegesByCountryIdUsecase = require("../usecases/find-colleges-by-country-id.usecase");
+const deleteCollegeByIdUsecase = require("../usecases/delete-college-by-id.usecase");
 
 module.exports = {
   async create(request, response) {
@@ -10,7 +11,9 @@ module.exports = {
       name,
       site,
       countryId,
-      photoUrl: `${process.env.APP_URL}/files/${photoUrl.filename}`,
+      photoUrl: photoUrl
+        ? `${process.env.APP_URL}/files/${photoUrl.filename}`
+        : "",
     });
 
     return response.json(country);
@@ -24,5 +27,15 @@ module.exports = {
     });
 
     return response.json(colleges);
+  },
+
+  async deleteCollege(request, response) {
+    const { collegeId } = request.params;
+
+    await deleteCollegeByIdUsecase.execute({
+      collegeId,
+    });
+
+    return response.status(205).json();
   },
 };

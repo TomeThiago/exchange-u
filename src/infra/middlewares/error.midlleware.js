@@ -7,5 +7,5 @@ module.exports = (error, request, response, next) => {
       .json({ error: error.message });
   }
 
-  return response.status(500).json({ erro: error.message });
+  return response.status(500).json({ error: error.message });
 };

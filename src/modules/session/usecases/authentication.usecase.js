@@ -40,7 +40,7 @@ module.exports = {
 
     return {
       token,
-      user: payload,
+      user: payload.user,
     };
   },
 };

@@ -13,5 +13,6 @@ countriesRouter.post(
   multer(multerConfig).single("photoUrl"),
   countriesController.create
 );
+countriesRouter.delete("/:countryId", countriesController.deleteCountry);
 
 module.exports = { countriesRouter };

@@ -15,5 +15,6 @@ collegeRouter.post(
 );
 
 collegeRouter.get("/:countryId", collegeController.findCollegesByCountryId);
+collegeRouter.delete("/:collegeId", collegeController.deleteCollege);
 
 module.exports = { collegeRouter };
