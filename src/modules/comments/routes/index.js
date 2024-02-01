@@ -6,6 +6,7 @@ const commentRouter = Router();
 
 commentRouter.get("/", commentsController.list);
 commentRouter.post("/create", commentsController.create);
+commentRouter.delete("/:commentId", commentsController.deleteComment);
 
 commentRouter.post(
   "/like/:commentId/create",
@@ -19,5 +20,9 @@ commentRouter.post(
 );
 
 commentRouter.get("/reports", commentsController.listReportsComents);
+commentRouter.delete(
+  "/reports/:reportId",
+  commentsController.removeReportComment
+);
 
 module.exports = { commentRouter };

@@ -5,6 +5,7 @@ const listCommentsUsecase = require("../usecases/list-comments.usecase");
 const listReportCommentsUsecase = require("../usecases/list-report-comments.usecase");
 const removeReportCommentUsecase = require("../usecases/remove-report-comment.usecase");
 const reportCommentUsecase = require("../usecases/report-comment.usecase");
+const deleteCommentUsecase = require("../usecases/delete-comment.usecase");
 
 module.exports = {
   async list(request, response) {
@@ -69,11 +70,11 @@ module.exports = {
     return response.status(205).json();
   },
 
-  async removeReportComment(request, response) {
-    const { reportId } = request.params;
+  async deleteComment(request, response) {
+    const { commentId } = request.params;
 
-    await removeReportCommentUsecase.execute({
-      reportId,
+    await deleteCommentUsecase.execute({
+      commentId,
     });
 
     return response.status(205).json();
@@ -88,5 +89,15 @@ module.exports = {
     });
 
     return response.json(reports);
+  },
+
+  async removeReportComment(request, response) {
+    const { reportId } = request.params;
+
+    await removeReportCommentUsecase.execute({
+      reportId,
+    });
+
+    return response.status(205).json();
   },
 };
