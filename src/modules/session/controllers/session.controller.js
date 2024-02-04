@@ -24,9 +24,7 @@ module.exports = {
       name,
       email,
       password,
-      photoUrl: photoUrl
-        ? `${process.env.APP_URL}/files/${photoUrl.filename}`
-        : "",
+      photoUrl,
       college,
     });
 

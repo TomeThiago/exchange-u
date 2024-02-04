@@ -42,7 +42,7 @@ module.exports = {
 
     await updatePhotoUsecase.execute({
       userId,
-      photoUrl: `${process.env.APP_URL}/files/${photoUrl.filename}`,
+      photoUrl,
     });
 
     return response.status(204).json();

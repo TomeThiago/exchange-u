@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require("path");
 
 module.exports = {
   development: {
@@ -11,5 +12,15 @@ module.exports = {
     define: {
       timestamp: false,
     },
+    seederStorage: "sequelize",
+    seederStoragePath: path.resolve(
+      __dirname,
+      "src",
+      "infra",
+      "database",
+      "seeders",
+      "sequelizeData.json"
+    ),
+    seederStorageTableName: "SequelizeMeta",
   },
 };

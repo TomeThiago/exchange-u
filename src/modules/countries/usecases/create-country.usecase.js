@@ -1,10 +1,9 @@
 const { Country } = require("../../../infra/database/entities/country");
 const AppError = require("../../../infra/errors/AppError");
+const storageProvider = require("../../../infra/providers/storageProvider");
 
 module.exports = {
-  async execute(props) {
-    const { name, code, photoUrl } = props;
-
+  async execute({ name, code, photoUrl }) {
     const countryFound = await Country.findOne({
       where: {
         code,
@@ -13,6 +12,20 @@ module.exports = {
 
     if (countryFound) {
       throw new AppError("There is already a country with this code");
+    }
+
+    if (photoUrl) {
+      await storageProvider.upload({
+        path: `countries`,
+        file: photoUrl,
+      });
+
+      const publicPhotoUrl = storageProvider.getPublicUrl({
+        path: `countries`,
+        fileName: photoUrl.originalname,
+      });
+
+      photoUrl = publicPhotoUrl.data.publicUrl;
     }
 
     const country = await Country.create({

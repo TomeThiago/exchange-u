@@ -34,7 +34,7 @@ const RecoveryPassword = connectionDb.define(
     },
   },
   {
-    tableName: "recuperacao-senha",
+    tableName: "recuperacao_senha",
     timestamps: false,
   }
 );

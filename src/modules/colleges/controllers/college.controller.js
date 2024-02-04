@@ -11,9 +11,7 @@ module.exports = {
       name,
       site,
       countryId,
-      photoUrl: photoUrl
-        ? `${process.env.APP_URL}/files/${photoUrl.filename}`
-        : "",
+      photoUrl,
     });
 
     return response.json(country);

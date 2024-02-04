@@ -1,6 +1,7 @@
 const AppError = require("../../../infra/errors/AppError");
 const { User } = require("../../../infra/database/entities/user");
 const hashProvider = require("../../../infra/providers/hashProvider");
+const storageProvider = require("../../../infra/providers/storageProvider");
 
 module.exports = {
   async execute({ name, email, password, photoUrl, college }) {
@@ -17,6 +18,20 @@ module.exports = {
     }
 
     const passwordHashed = await hashProvider.hash(password);
+
+    if (photoUrl) {
+      await storageProvider.upload({
+        path: `users`,
+        file: photoUrl,
+      });
+
+      const publicPhotoUrl = storageProvider.getPublicUrl({
+        path: `users`,
+        fileName: photoUrl.originalname,
+      });
+
+      photoUrl = publicPhotoUrl.data.publicUrl;
+    }
 
     const user = await User.create({
       name,

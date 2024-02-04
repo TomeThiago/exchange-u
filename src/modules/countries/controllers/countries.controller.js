@@ -9,9 +9,7 @@ module.exports = {
 
     const country = await createCountryUsecase.execute({
       name,
-      photoUrl: photoUrl
-        ? `${process.env.APP_URL}/files/${photoUrl.filename}`
-        : "",
+      photoUrl,
       code,
     });
 

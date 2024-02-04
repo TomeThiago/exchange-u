@@ -9,18 +9,18 @@ module.exports = {
     "database",
     "migrations"
   ),
-  "seeders-path": path.resolve(
-    __dirname,
-    "src",
-    "infra",
-    "database",
-    "seeders"
-  ),
   "models-path": path.resolve(
     __dirname,
     "src",
     "infra",
     "database",
     "entities"
+  ),
+  "seeders-path": path.resolve(
+    __dirname,
+    "src",
+    "infra",
+    "database",
+    "seeders"
   ),
 };

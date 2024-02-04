@@ -1,25 +1,9 @@
 const multer = require("multer");
-const path = require("path");
-const crypto = require("crypto");
+
+const storage = multer.memoryStorage({});
 
 module.exports = {
-  dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, path.resolve(__dirname, "..", "..", "tmp", "uploads"));
-    },
-    filename: (req, file, cb) => {
-      crypto.randomBytes(16, (err, hash) => {
-        if (err) cb(err);
-
-        file.originalname = file.originalname.replace(/ /g, "_");
-
-        file.key = `${hash.toString("hex")}-${file.originalname}`;
-
-        cb(null, file.key);
-      });
-    },
-  }),
+  storage,
   fileFilter: (req, file, cb) => {
     const allowedMimes = ["image/jpeg", "image/pjpeg", "image/png"];
 
