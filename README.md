@@ -20,9 +20,26 @@ npm install
 Etapa 2 - Crie um arquivo .env para informar algumas keys importantes como a `SECRET` para validar o JWT, `PORT` para dizer qual é porta de execução do projeto e `EXPIRES_IN` para dizer quando expira o token.
 
 ```
-PORT=3000
+PORT=3333
 SECRET=secret
-EXPIRES_IN='1h'
+EXPIRES_IN='1d'
+
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+
+SMTP_HOST=
+SMTP_PORT=
+SMTP_SECURE=
+SMTP_AUTH_USER=
+SMTP_AUTH_PASSWORD=
+SMTP_SENDER=
+
+SUPABASE_URL=
+SUPABASE_KEY=
+SUPABASE_BUCKET_NAME=
 ```
 
 Etapa 3 - Subir a aplicação
